@@ -560,6 +560,7 @@ jobs:
 
       - name: Checkpoint Cache (Save Base to GHCR)
         if: steps.matrix_status.outputs.status != 'success' && steps.compile_base.outcome == 'success'
+        continue-on-error: true
         run: |
           echo "==== 智能探测 Base 是否更新 ===="
           cd /workdir
