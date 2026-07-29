@@ -1,17 +1,9 @@
 <details> <summary> <b>openwrt-passwall new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/Openwrt-Passwall/openwrt-passwall/compare/d01124122f885f29fda4de6adcbd64a7f4a3c554...b8cc7a800ccbcf356c9b45f85f14db9e11eae953)  
+#### [:mega: Full Changelog. ](https://github.com/Openwrt-Passwall/openwrt-passwall/compare/b8cc7a800ccbcf356c9b45f85f14db9e11eae953...edbf910e5a6c91addca7e4de53f501b4e0b2ee61)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-b8cc7a80|A-BO|Sun Jul 26 22:37:27 2026 +0800|luci: optimize
-9b1929ba|A-BO|Sun Jul 26 22:35:37 2026 +0800|luci: add node log and edit support for ACL rules
-ae5d8e9d|A-BO|Fri Jul 24 10:55:42 2026 +0800|luci: 26.7.24
-1287338f|A-BO|Fri Jul 24 10:40:56 2026 +0800|luci: adjust the logic of socks auto switch
-3fdfb25d|A-BO|Thu Jul 23 18:01:17 2026 +0800|luci: optimize clash subconverter
-e9c05acf|A-BO|Thu Jul 23 11:24:18 2026 +0800|luci: optimize
-3e525ad2|A-BO|Wed Jul 22 22:11:59 2026 +0800|luci: add `disable-reuse` option for anytls
-3db89c69|A-BO|Wed Jul 22 21:27:50 2026 +0800|luci: optimize anytls subscription
-804dcf7f|A-BO|Wed Jul 22 12:55:08 2026 +0800|luci: optimize xray balancing logic
+edbf910e|A-BO|Mon Jul 27 13:24:36 2026 +0800|luci: adjust the access control logging logic
 </details>

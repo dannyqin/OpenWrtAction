@@ -1,25 +1,10 @@
 <details> <summary> <b>luci-theme-aurora new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/eamonxg/luci-theme-aurora/compare/76ab48a4fb518ba6e25150093fdba55b559ecda4...ca1e665303df6944306579b0a4df0ab604a5c0a2)  
+#### [:mega: Full Changelog. ](https://github.com/eamonxg/luci-theme-aurora/compare/ca1e665303df6944306579b0a4df0ab604a5c0a2...e14cfcd1375e01dbea83519177def0a9a5de3eb5)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-ca1e665|Eamon|Sun Jul 26 22:21:00 2026 +0800|fix: borrow the config app's translated mode labels
-d682f12|Eamon|Sun Jul 26 22:07:46 2026 +0800|fix: repaint the bar in step with theme flips
-cc3b7c9|Eamon|Sun Jul 26 21:43:02 2026 +0800|feat: slide the sidebar and content as one coupled wall
-b473e82|Eamon|Sun Jul 26 21:42:49 2026 +0800|test: catch stale assertions up with the aligned radii
-ac043fa|Eamon|Sun Jul 26 20:08:05 2026 +0800|fix: align stray radii with their component peers
-ac20829|Eamon|Sun Jul 26 19:28:26 2026 +0800|refactor: scope the content width cap to centred layouts
-5d72aff|eamonxg|Sun Jul 26 00:19:47 2026 +0800|perf: optimize raw theme assets
-f6d6b41|Eamon|Sat Jul 25 17:44:55 2026 +0800|feat: in-mock navigation, one-key capture and hardening for /mocks/
-9f0006e|Eamon|Sat Jul 25 02:14:21 2026 +0800|feat: add a dev mock-pages workflow for third-party app pages
-7066351|shiraneko|Sat Jul 25 02:15:34 2026 +0800|fix: add CSS patches for luci-app-qmodem admin pages (#92)
-67d0d63|Eamon|Thu Jul 23 21:31:15 2026 +0800|docs: add the eamonxg package feed as an install method
-96054be|Eamon|Thu Jul 23 20:16:19 2026 +0800|chore: untrack local superpowers spec doc
-c096d63|Eamon|Thu Jul 23 16:57:44 2026 +0800|ci: emit the missing-token annotation on stdout
-ed08cb0|Eamon|Thu Jul 23 16:56:14 2026 +0800|ci: fail the release when the feed is never notified
-b2d83a7|Eamon|Thu Jul 23 14:53:52 2026 +0800|docs: specify Aurora release poster
-
-
+e14cfcd|Eamon|Mon Jul 27 00:51:38 2026 +0800|refactor: rewrite patches in plain css, shedding the tailwind toll
+a5b44da|Eamon|Mon Jul 27 00:51:26 2026 +0800|feat: teach patches to load scripts and dress the log pages
 </details>

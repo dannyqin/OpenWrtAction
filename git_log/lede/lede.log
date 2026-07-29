@@ -1,9 +1,9 @@
 <details> <summary> <b>lede new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/coolsnowwolf/lede/compare/16db931ce149fad4fa40fc98aaee47bc1dd69a20...6883e66e8b002791cce8587ddb85b63b81b0754c)  
+#### [:mega: Full Changelog. ](https://github.com/coolsnowwolf/lede/compare/6883e66e8b002791cce8587ddb85b63b81b0754c...6c92c15df3dce19c73eb7d986f48cf6b2304306f)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-6883e66e8|aiamadeus|Fri Jul 17 18:08:01 2026 +0800|rockchip: update rk3328 dfi driver
+6c92c15df|Ivan Pavlov|Sat Sep 7 20:54:34 2024 +0300|hostapd: update to tag 2024-09-15
 </details>

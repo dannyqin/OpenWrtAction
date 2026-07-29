@@ -1,9 +1,0 @@
-<details> <summary> <b>OpenAppFilter new commit log :rocket: </b> </summary>
-
-#### [:mega: Full Changelog. ](https://github.com/destan19/OpenAppFilter/compare/569f93bfd56afc3ae8c21f13fc973926ff6629a5...a189ad85e8fb461318533941963f0e2975274a19)  
-:heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
-
-SHA|Author|Date|Message
--|-|-|-
-a189ad8|destan19|Fri Jul 24 15:57:58 2026 +0800|#351 eliminate relevant compilation warnings and prevent strict mode errors.
-</details>

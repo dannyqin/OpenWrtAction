@@ -1,12 +1,10 @@
 <details> <summary> <b>luci-theme-argon new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/jerrykuku/luci-theme-argon/compare/5b675d93b444c209ba59b6fb9c07fa569d359cdb...6e4ad583c1a57c6e002a60dd105656fcfa876910)  
+#### [:mega: Full Changelog. ](https://github.com/jerrykuku/luci-theme-argon/compare/6e4ad583c1a57c6e002a60dd105656fcfa876910...b43b34cbd848192b09e62f085d0c9f01b8a2c305)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-6e4ad58|老竭力|Thu Jul 23 18:26:01 2026 +0800|Merge pull request #689 from Aethersailor/fix-for-openclash
-5d2293e|Aethersailor|Thu Jul 23 15:25:00 2026 +0800|fix(openclash): normalize config switcher tab height
-ec069b6|老竭力|Wed Jul 22 21:34:22 2026 +0800|Merge pull request #688 from sydnkj/master
-cfba2d2|WenisOK|Wed Jul 22 20:08:54 2026 +0800|修改警告提示对比度弱、系统设置按钮组间距，新增新版隐藏按钮样式
+b43b34c|老竭力|Tue Jul 28 18:29:20 2026 +0800|Merge pull request #692 from sydnkj/master
+a496b6e|WenisOK|Tue Jul 28 18:09:02 2026 +0800|fix(pr) 修复#688，仅修改了编译产物，没有修改less源代码的问题
 </details>

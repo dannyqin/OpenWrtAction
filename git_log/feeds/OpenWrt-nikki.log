@@ -1,9 +1,9 @@
 <details> <summary> <b>OpenWrt-nikki new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/nikkinikki-org/OpenWrt-nikki/compare/cce63f83cd23cab2a0ea6b9471569dde1fcf60a5...f06b6b448928501e7511bdfb3497b1186d919316)  
+#### [:mega: Full Changelog. ](https://github.com/nikkinikki-org/OpenWrt-nikki/compare/f06b6b448928501e7511bdfb3497b1186d919316...34a036708c4e163f11194b2952cd87ef386486ed)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-f06b6b4|Joseph Mory|Fri Jul 24 14:21:54 2026 +0800|fix: mojibake when saving a large file
+34a0367|Joseph Mory|Tue Jul 28 15:50:42 2026 +0800|docs: Update README
 </details>
