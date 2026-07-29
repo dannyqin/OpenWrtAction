@@ -34,6 +34,9 @@ clone_custom_packages () {
     git clone https://github.com/derisamedia/luci-theme-arwi.git ${path}luci-theme-arwi
     git clone https://github.com/derisamedia/luci-theme-alpha.git ${path}luci-theme-alpha
     git clone https://github.com/animegasan/luci-app-alpha-config.git ${path}luci-app-alpha-config
+    mkdir -p ${path}luci-app-alpha-config/po/zh_Hans
+    cp -a "$PATCHES_SRC_DIR/custom_translations/luci-app-alpha-config/po/zh_Hans/." \
+        ${path}luci-app-alpha-config/po/zh_Hans/
     git clone https://github.com/AngelaCooljx/luci-theme-material3.git ${path}luci-theme-material3
 
     git clone https://github.com/sbwml/luci-app-mosdns -b v5 ${path}mosdns
@@ -59,6 +62,16 @@ clone_custom_packages () {
     # QoSmate backend and LuCI frontend.
     git clone --depth 1 https://github.com/hudra0/qosmate.git ${path}qosmate
     git clone --depth 1 https://github.com/hudra0/luci-app-qosmate.git ${path}luci-app-qosmate
+
+    # H69K userspace PWM fan controller and LuCI interface.
+    cp -a "$PATCHES_SRC_DIR/custom_packages/luci-app-h69k-fancontrol" \
+        ${path}luci-app-h69k-fancontrol
+
+    # Stable sqm-autorate v0.6.1 and its pure-Lua vstruct dependency.
+    cp -a "$PATCHES_SRC_DIR/custom_packages/lua-vstruct" \
+        ${path}lua-vstruct
+    cp -a "$PATCHES_SRC_DIR/custom_packages/sqm-autorate" \
+        ${path}sqm-autorate
 
     
 

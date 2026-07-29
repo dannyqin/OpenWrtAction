@@ -17,6 +17,30 @@ else
     PATCHES_SRC_DIR="../OpenWrtAction"
 fi
 
+# Let the LuCI/userspace controller own the H69K PWM output. The SoC's
+# independent critical thermal shutdown protection remains in place.
+H69K_DTS="target/linux/rockchip/files/arch/arm64/boot/dts/rockchip/rk3568-opc-h69k.dts"
+if [ -f "$H69K_DTS" ] && grep -q "cpu_passive: cpu_passive" "$H69K_DTS"; then
+    awk '
+        /^&cpu_thermal[[:space:]]*\{/ {
+            skipping = 1
+            depth = 1
+            next
+        }
+        skipping {
+            line = $0
+            opens = gsub(/\{/, "{", line)
+            closes = gsub(/\}/, "}", line)
+            depth += opens - closes
+            if (depth <= 0)
+                skipping = 0
+            next
+        }
+        { print }
+    ' "$H69K_DTS" > "$H69K_DTS.userspace-fan"
+    mv "$H69K_DTS.userspace-fan" "$H69K_DTS"
+fi
+
 
 #------------------------------------------------------移植包------------------------------------------------------------
 

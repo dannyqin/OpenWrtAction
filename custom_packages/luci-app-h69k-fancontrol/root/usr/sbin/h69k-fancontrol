@@ -1,0 +1,307 @@
+#!/bin/sh
+
+. /lib/functions.sh
+
+TAG="h69k-fancontrol"
+STATE_FILE="/tmp/h69k-fancontrol.state"
+
+log() {
+	logger -t "$TAG" "$*"
+}
+
+is_uint() {
+	case "$1" in
+		''|*[!0-9]*) return 1 ;;
+		*) return 0 ;;
+	esac
+}
+
+clamp() {
+	value="$1"
+	min="$2"
+	max="$3"
+	[ "$value" -lt "$min" ] && value="$min"
+	[ "$value" -gt "$max" ] && value="$max"
+	echo "$value"
+}
+
+find_hwmon() {
+	for path in /sys/class/hwmon/hwmon*; do
+		[ -r "$path/name" ] || continue
+		name="$(cat "$path/name" 2>/dev/null)"
+		case "$name" in
+			pwmfan|pwm-fan)
+				[ -w "$path/pwm1" ] && {
+					echo "$path"
+					return 0
+				}
+				;;
+		esac
+	done
+
+	for path in /sys/class/hwmon/hwmon*; do
+		[ -w "$path/pwm1" ] && {
+			echo "$path"
+			return 0
+		}
+	done
+	return 1
+}
+
+find_temp_path() {
+	for zone in /sys/class/thermal/thermal_zone*; do
+		[ -r "$zone/temp" ] || continue
+		type="$(cat "$zone/type" 2>/dev/null)"
+		case "$type" in
+			*cpu*|*CPU*|*soc*|*SoC*|*package*)
+				echo "$zone/temp"
+				return 0
+				;;
+		esac
+	done
+
+	[ -r /sys/class/thermal/thermal_zone0/temp ] && {
+		echo /sys/class/thermal/thermal_zone0/temp
+		return 0
+	}
+	return 1
+}
+
+load_settings() {
+	config_load h69k-fancontrol
+	config_get_bool enabled main enabled 1
+	config_get mode main mode auto
+	config_get poll_interval main poll_interval 3
+	config_get hysteresis main hysteresis 2
+	config_get critical_temp main critical_temp 85
+	config_get_bool safety_enabled main safety_enabled 1
+	config_get_bool fail_safe main fail_safe 1
+	config_get temp1 main temp1 40
+	config_get pwm1 main pwm1 39
+	config_get temp2 main temp2 50
+	config_get pwm2 main pwm2 59
+	config_get temp3 main temp3 60
+	config_get pwm3 main pwm3 78
+	config_get temp4 main temp4 70
+	config_get pwm4 main pwm4 100
+	config_get manual_pwm main manual_pwm 50
+
+	for variable in poll_interval hysteresis critical_temp temp1 pwm1 temp2 pwm2 temp3 pwm3 temp4 pwm4 manual_pwm; do
+		eval "value=\${$variable}"
+		is_uint "$value" || {
+			log "Invalid numeric setting: $variable=$value"
+			return 1
+		}
+	done
+
+	[ "$temp1" -lt "$temp2" ] &&
+		[ "$temp2" -lt "$temp3" ] &&
+		[ "$temp3" -lt "$temp4" ] || {
+		log "Temperature thresholds must be strictly increasing"
+		return 1
+	}
+
+	poll_interval="$(clamp "$poll_interval" 1 30)"
+	hysteresis="$(clamp "$hysteresis" 0 20)"
+	critical_temp="$(clamp "$critical_temp" 60 120)"
+	pwm1="$(clamp "$pwm1" 0 100)"
+	pwm2="$(clamp "$pwm2" 0 100)"
+	pwm3="$(clamp "$pwm3" 0 100)"
+	pwm4="$(clamp "$pwm4" 0 100)"
+	manual_pwm="$(clamp "$manual_pwm" 0 100)"
+	return 0
+}
+
+percent_to_raw() {
+	echo $((($1 * 255 + 50) / 100))
+}
+
+write_percent() {
+	percent="$(clamp "$1" 0 100)"
+	raw="$(percent_to_raw "$percent")"
+
+	[ -n "$HWMON" ] && [ -w "$HWMON/pwm1_enable" ] &&
+		echo 1 > "$HWMON/pwm1_enable" 2>/dev/null
+	echo "$raw" > "$HWMON/pwm1" 2>/dev/null || return 1
+	CURRENT_PWM="$percent"
+	echo "$CURRENT_STATE $CURRENT_PWM" > "$STATE_FILE"
+	return 0
+}
+
+read_temp_c() {
+	[ -n "$TEMP_PATH" ] && [ -r "$TEMP_PATH" ] || return 1
+	milli="$(cat "$TEMP_PATH" 2>/dev/null)"
+	is_uint "$milli" || return 1
+	echo $((milli / 1000))
+}
+
+desired_auto_state() {
+	temp="$1"
+	if [ "$temp" -ge "$temp4" ]; then
+		echo 4
+	elif [ "$temp" -ge "$temp3" ]; then
+		echo 3
+	elif [ "$temp" -ge "$temp2" ]; then
+		echo 2
+	elif [ "$temp" -ge "$temp1" ]; then
+		echo 1
+	else
+		echo 0
+	fi
+}
+
+state_threshold() {
+	case "$1" in
+		1) echo "$temp1" ;;
+		2) echo "$temp2" ;;
+		3) echo "$temp3" ;;
+		4) echo "$temp4" ;;
+		*) echo 0 ;;
+	esac
+}
+
+state_pwm() {
+	case "$1" in
+		1) echo "$pwm1" ;;
+		2) echo "$pwm2" ;;
+		3) echo "$pwm3" ;;
+		4) echo "$pwm4" ;;
+		*) echo 0 ;;
+	esac
+}
+
+apply_auto() {
+	temp="$1"
+	target="$(desired_auto_state "$temp")"
+
+	if [ "$target" -lt "$CURRENT_STATE" ]; then
+		current_threshold="$(state_threshold "$CURRENT_STATE")"
+		if [ "$temp" -ge $((current_threshold - hysteresis)) ]; then
+			target="$CURRENT_STATE"
+		fi
+	fi
+
+	CURRENT_STATE="$target"
+	write_percent "$(state_pwm "$CURRENT_STATE")"
+}
+
+apply_mode() {
+	temp="$1"
+
+	if [ "$safety_enabled" -eq 1 ] && [ "$temp" -ge "$critical_temp" ]; then
+		CURRENT_STATE=4
+		write_percent 100
+		return
+	fi
+
+	case "$mode" in
+		auto)
+			apply_auto "$temp"
+			;;
+		manual)
+			CURRENT_STATE=5
+			write_percent "$manual_pwm"
+			;;
+		full)
+			CURRENT_STATE=4
+			write_percent 100
+			;;
+		off)
+			CURRENT_STATE=0
+			write_percent 0
+			;;
+		*)
+			log "Unknown mode '$mode'; using full speed"
+			CURRENT_STATE=4
+			write_percent 100
+			;;
+	esac
+}
+
+run_daemon() {
+	load_settings || exit 1
+	HWMON="$(find_hwmon)" || {
+		log "No writable pwm-fan hwmon device found"
+		exit 1
+	}
+	TEMP_PATH="$(find_temp_path)" || {
+		log "No CPU thermal sensor found"
+		write_percent 100
+		exit 1
+	}
+
+	CURRENT_STATE=0
+	CURRENT_PWM=100
+	if [ -r "$STATE_FILE" ]; then
+		read -r CURRENT_STATE CURRENT_PWM < "$STATE_FILE"
+		is_uint "$CURRENT_STATE" || CURRENT_STATE=0
+		is_uint "$CURRENT_PWM" || CURRENT_PWM=100
+	fi
+
+	mkdir -p /var/run
+	echo "$$" > /var/run/h69k-fancontrol.pid
+	trap 'rm -f /var/run/h69k-fancontrol.pid; exit 0' INT TERM EXIT
+
+	log "Started: mode=$mode hwmon=$HWMON temperature=$TEMP_PATH"
+	while true; do
+		temp="$(read_temp_c)"
+		if is_uint "$temp"; then
+			apply_mode "$temp" || log "Failed to write PWM value"
+		else
+			log "Temperature read failed"
+			if [ "$fail_safe" -eq 1 ]; then
+				CURRENT_STATE=4
+				write_percent 100
+			fi
+		fi
+		sleep "$poll_interval"
+	done
+}
+
+json_status() {
+	load_settings >/dev/null 2>&1
+	HWMON="$(find_hwmon 2>/dev/null)"
+	TEMP_PATH="$(find_temp_path 2>/dev/null)"
+	temp_c="$(read_temp_c 2>/dev/null)"
+	[ -n "$temp_c" ] || temp_c=null
+
+	raw=null
+	percent=null
+	rpm=null
+	hwmon_name=""
+	if [ -n "$HWMON" ]; then
+		hwmon_name="$(cat "$HWMON/name" 2>/dev/null)"
+		value="$(cat "$HWMON/pwm1" 2>/dev/null)"
+		if is_uint "$value"; then
+			raw="$value"
+			percent=$(((value * 100 + 127) / 255))
+		fi
+		value="$(cat "$HWMON/fan1_input" 2>/dev/null)"
+		is_uint "$value" && rpm="$value"
+	fi
+
+	running=0
+	if [ -r /var/run/h69k-fancontrol.pid ]; then
+		pid="$(cat /var/run/h69k-fancontrol.pid 2>/dev/null)"
+		is_uint "$pid" && kill -0 "$pid" 2>/dev/null && running=1
+	fi
+	printf '{"running":%s,"mode":"%s","temperature":%s,"pwm_raw":%s,"pwm_percent":%s,"rpm":%s,"hwmon":"%s","temperature_path":"%s","safety_enabled":%s,"critical_temp":%s}\n' \
+		"$running" "$mode" "$temp_c" "$raw" "$percent" "$rpm" "$hwmon_name" "$TEMP_PATH" "$safety_enabled" "$critical_temp"
+}
+
+one_shot() {
+	HWMON="$(find_hwmon)" || exit 1
+	CURRENT_STATE=4
+	case "$1" in
+		full) write_percent 100 ;;
+		off) CURRENT_STATE=0; write_percent 0 ;;
+		*) exit 1 ;;
+	esac
+}
+
+case "$1" in
+	daemon) run_daemon ;;
+	status) json_status ;;
+	full|off) one_shot "$1" ;;
+	*) echo "Usage: $0 {daemon|status|full|off}" >&2; exit 1 ;;
+esac

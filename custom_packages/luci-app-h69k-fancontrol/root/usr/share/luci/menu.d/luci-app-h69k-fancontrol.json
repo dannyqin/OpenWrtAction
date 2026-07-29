@@ -1,0 +1,16 @@
+{
+	"admin/system/h69k-fancontrol": {
+		"title": "H69K Fan Control",
+		"order": 45,
+		"action": {
+			"type": "view",
+			"path": "system/h69k-fancontrol"
+		},
+		"depends": {
+			"acl": [ "luci-app-h69k-fancontrol" ],
+			"uci": {
+				"h69k-fancontrol": true
+			}
+		}
+	}
+}

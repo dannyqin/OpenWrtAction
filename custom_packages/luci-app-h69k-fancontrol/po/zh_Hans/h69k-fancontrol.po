@@ -1,0 +1,115 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh_CN\n"
+
+msgid "H69K Fan Control"
+msgstr "H69K 风扇控制"
+
+msgid "Configure automatic temperature steps, manual PWM, full speed and forced fan shutdown. Real RPM is shown only when the board and fan expose a tachometer signal."
+msgstr "配置自动温控档位、手动 PWM、全速和强制关闭。只有主板和风扇提供测速信号时才能显示真实转速。"
+
+msgid "Current status"
+msgstr "当前状态"
+
+msgid "Controller"
+msgstr "控制器"
+
+msgid "Running"
+msgstr "运行中"
+
+msgid "Stopped"
+msgstr "已停止"
+
+msgid "CPU temperature"
+msgstr "CPU 温度"
+
+msgid "PWM output"
+msgstr "PWM 输出"
+
+msgid "Fan speed"
+msgstr "风扇转速"
+
+msgid "No tachometer signal"
+msgstr "未检测到测速信号"
+
+msgid "Hardware driver"
+msgstr "硬件驱动"
+
+msgid "Not detected"
+msgstr "未检测到"
+
+msgid "Unavailable"
+msgstr "不可用"
+
+msgid "Operating mode"
+msgstr "运行模式"
+
+msgid "Enable controller"
+msgstr "启用控制器"
+
+msgid "Mode"
+msgstr "模式"
+
+msgid "Automatic temperature control"
+msgstr "自动温控"
+
+msgid "Manual PWM"
+msgstr "手动 PWM"
+
+msgid "Full speed"
+msgstr "全速"
+
+msgid "Force fan off"
+msgstr "强制关闭风扇"
+
+msgid "Force fan off may cause overheating. With safety protection enabled, the fan will still run at full speed after the critical temperature is reached."
+msgstr "强制关闭可能导致过热。启用安全保护后，即使选择强制关闭，达到保护温度时仍会强制全速。"
+
+msgid "PWM duty cycle from 0 to 100 percent."
+msgstr "PWM 占空比，范围 0% 至 100%。"
+
+msgid "Polling interval"
+msgstr "检测间隔"
+
+msgid "Temperature sampling interval in seconds."
+msgstr "温度采样间隔，单位为秒。"
+
+msgid "Hysteresis"
+msgstr "温度回差"
+
+msgid "Temperature must fall by this many degrees before switching to a lower fan step."
+msgstr "温度下降超过此数值后才切换到较低档位，避免频繁变速。"
+
+msgid "Automatic temperature curve"
+msgstr "自动温控曲线"
+
+msgid "Step %d temperature"
+msgstr "第 %d 档温度"
+
+msgid "Temperature in degrees Celsius."
+msgstr "温度，单位为摄氏度。"
+
+msgid "Step %d PWM"
+msgstr "第 %d 档 PWM"
+
+msgid "Safety protection"
+msgstr "安全保护"
+
+msgid "Critical-temperature override"
+msgstr "高温强制保护"
+
+msgid "Run the fan at full speed at the critical temperature, including when Force fan off is selected."
+msgstr "达到保护温度后强制风扇全速，包括已经选择强制关闭的情况。"
+
+msgid "Critical temperature"
+msgstr "保护温度"
+
+msgid "Temperature-sensor fail-safe"
+msgstr "温度传感器故障保护"
+
+msgid "Run the fan at full speed if the CPU temperature cannot be read."
+msgstr "无法读取 CPU 温度时，强制风扇全速运行。"
+
+msgid "Failed to save settings or restart the fan controller: %s"
+msgstr "保存设置或重启风扇控制器失败：%s"

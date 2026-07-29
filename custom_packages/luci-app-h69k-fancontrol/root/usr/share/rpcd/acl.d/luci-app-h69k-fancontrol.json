@@ -1,0 +1,26 @@
+{
+	"luci-app-h69k-fancontrol": {
+		"description": "Grant access to H69K fan control",
+		"read": {
+			"ubus": {
+				"file": [ "read", "exec" ]
+			},
+			"uci": [ "h69k-fancontrol" ],
+			"file": {
+				"/usr/sbin/h69k-fancontrol": [ "exec" ],
+				"/etc/init.d/h69k-fancontrol": [ "read", "exec" ]
+			}
+		},
+		"write": {
+			"ubus": {
+				"file": [ "exec" ],
+				"luci": [ "setInitAction" ]
+			},
+			"uci": [ "h69k-fancontrol" ],
+			"file": {
+				"/usr/sbin/h69k-fancontrol": [ "exec" ],
+				"/etc/init.d/h69k-fancontrol": [ "exec" ]
+			}
+		}
+	}
+}

@@ -1,0 +1,136 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: zh_CN\n"
+
+msgid "Alpha Config"
+msgstr "Alpha 主题设置"
+
+msgid "Alpha theme configuration"
+msgstr "Alpha 主题设置"
+
+msgid "Here you can set background login and dashboard themes. Chrome is recommended."
+msgstr "在这里设置登录页和管理页面的背景与主题，建议使用 Chrome 浏览器。"
+
+msgid "Theme configuration"
+msgstr "主题设置"
+
+msgid "Primary color"
+msgstr "主色调"
+
+msgid "A HEX color (default: #2222359a)."
+msgstr "十六进制颜色值，默认 #2222359a。"
+
+msgid "Expecting: valid HEX color value"
+msgstr "请输入有效的十六进制颜色值"
+
+msgid "Transparency level"
+msgstr "透明度等级"
+
+msgid "Transparent level for menu."
+msgstr "菜单透明度等级。"
+
+msgid "Navigation bar"
+msgstr "导航栏"
+
+msgid "Enable navigation bar menu."
+msgstr "启用导航栏菜单。"
+
+msgid "Background configuration"
+msgstr "背景设置"
+
+msgid "You can upload files such as jpg or png files, and files will be uploaded to <code>%s</code>."
+msgstr "可以上传 JPG 或 PNG 文件，文件将保存到 <code>%s</code>。"
+
+msgid "Login"
+msgstr "登录页"
+
+msgid "Upload file for login background."
+msgstr "上传登录页背景图片。"
+
+msgid "Upload"
+msgstr "上传"
+
+msgid "Login picture successfully uploaded."
+msgstr "登录页图片上传成功。"
+
+msgid "Dashboard"
+msgstr "管理页面"
+
+msgid "Upload file for dashboard background."
+msgstr "上传管理页面背景图片。"
+
+msgid "Dashboard picture successfully uploaded."
+msgstr "管理页面图片上传成功。"
+
+msgid "Navigation bar configuration"
+msgstr "导航栏设置"
+
+msgid "Add new navigation"
+msgstr "添加导航项"
+
+msgid "Add new navigation..."
+msgstr "添加导航项…"
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Line"
+msgstr "行号"
+
+msgid "New tab"
+msgstr "新标签页"
+
+msgid "Icon"
+msgstr "图标"
+
+msgid "Address"
+msgstr "地址"
+
+msgid "Name navigation bar"
+msgstr "导航项名称"
+
+msgid "Enable navigation bar."
+msgstr "启用导航项。"
+
+msgid "Enable"
+msgstr "启用"
+
+msgid "Disable"
+msgstr "禁用"
+
+msgid "Line number"
+msgstr "行号"
+
+msgid "Enter a line number between 1 to 10."
+msgstr "请输入 1 至 10 的行号。"
+
+msgid "Open in new tab"
+msgstr "在新标签页打开"
+
+msgid "Enable open links in a new tab."
+msgstr "在新标签页中打开链接。"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "否"
+
+msgid "Upload PNG file with size 256x256."
+msgstr "上传尺寸为 256×256 的 PNG 文件。"
+
+msgid "Modem"
+msgstr "调制解调器"
+
+msgid "Network"
+msgstr "网络"
+
+msgid "Overview"
+msgstr "概览"
+
+msgid "Terminal"
+msgstr "终端"
