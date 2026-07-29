@@ -1,0 +1,107 @@
+name: Prepare H69K Custom Build
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Restrict build to LEDE H69K
+        shell: bash
+        run: |
+          sed -i 's/^source_code_platforms=.*/source_code_platforms=(lede)/' compile_script/platforms.sh
+          sed -i 's/^lede_platforms=.*/lede_platforms=(H69K)/' compile_script/platforms.sh
+
+      - name: Add cellular and QoSmate sources
+        shell: bash
+        run: |
+          marker='    git clone https://github.com/destan19/OpenAppFilter.git ${path}OpenAppFilter'
+          if ! grep -q 'luci-app-modemdata.git' diy_script/custom_feeds_and_packages.sh; then
+            sed -i "/OpenAppFilter.git.*OpenAppFilter/a\\
+\\
+    # H69K/RM520N-GL cellular management.\\
+    git clone --depth 1 https://github.com/4IceG/luci-app-modemdata.git \${path}luci-app-modemdata\\
+    git clone --depth 1 https://github.com/obsy/modemdata.git \${path}modemdata\\
+    git clone --depth 1 https://github.com/4IceG/luci-app-atcommands.git \${path}luci-app-atcommands\\
+\\
+    # QoSmate backend and LuCI frontend.\\
+    git clone --depth 1 https://github.com/hudra0/qosmate.git \${path}qosmate\\
+    git clone --depth 1 https://github.com/hudra0/luci-app-qosmate.git \${path}luci-app-qosmate" \
+              diy_script/custom_feeds_and_packages.sh
+          fi
+
+      - name: Enable H69K hardware and feature packages
+        shell: bash
+        run: |
+          cfg='config/leanlede_config/H69K.config'
+          enable_pkg() {
+            local symbol="$1"
+            if grep -q "^# ${symbol} is not set$" "$cfg"; then
+              sed -i "s/^# ${symbol} is not set$/${symbol}=y/" "$cfg"
+            elif ! grep -q "^${symbol}=y$" "$cfg"; then
+              printf '%s=y\n' "$symbol" >> "$cfg"
+            fi
+          }
+
+          packages=(
+            CONFIG_PACKAGE_cpufreq
+            CONFIG_PACKAGE_kmod-hwmon-pwmfan
+            CONFIG_PACKAGE_kmod-mt7915e
+            CONFIG_PACKAGE_kmod-mt7916-firmware
+            CONFIG_PACKAGE_kmod-usb-net-cdc-mbim
+            CONFIG_PACKAGE_kmod-usb-net-qmi-wwan
+            CONFIG_PACKAGE_kmod-usb-serial
+            CONFIG_PACKAGE_kmod-usb-serial-option
+            CONFIG_PACKAGE_luci-app-3ginfo-lite
+            CONFIG_PACKAGE_luci-app-atcommands
+            CONFIG_PACKAGE_luci-app-cpufreq
+            CONFIG_PACKAGE_luci-app-modemband
+            CONFIG_PACKAGE_luci-app-modemdata
+            CONFIG_PACKAGE_luci-app-openclash
+            CONFIG_PACKAGE_luci-app-qosmate
+            CONFIG_PACKAGE_luci-proto-mbim
+            CONFIG_PACKAGE_luci-proto-qmi
+            CONFIG_PACKAGE_luci-proto-quectel
+            CONFIG_PACKAGE_comgt
+            CONFIG_PACKAGE_modemband
+            CONFIG_PACKAGE_modemdata
+            CONFIG_PACKAGE_umbim
+            CONFIG_PACKAGE_uqmi
+            CONFIG_PACKAGE_quectel-cm
+            CONFIG_PACKAGE_qfirehose
+            CONFIG_PACKAGE_sms-tool
+            CONFIG_PACKAGE_qosmate
+          )
+
+          for symbol in "${packages[@]}"; do
+            enable_pkg "$symbol"
+          done
+
+      - name: Commit configuration
+        shell: bash
+        run: |
+          git config user.name dannyqin
+          git config user.email dannyqin@users.noreply.github.com
+          git add compile_script/platforms.sh \
+                  config/leanlede_config/H69K.config \
+                  diy_script/custom_feeds_and_packages.sh
+          if ! git diff --cached --quiet; then
+            git commit -m "build: custom H69K RM520N-GL MT7916 image"
+            git push origin HEAD:main
+          fi
+
+      - name: Start firmware build
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: gh workflow run 'Build_Multi_Platform(V6)' --ref main -f force_rebuild=true
