@@ -61,6 +61,8 @@ jobs:
             CONFIG_PACKAGE_kmod-hwmon-pwmfan
             CONFIG_PACKAGE_kmod-mt7915e
             CONFIG_PACKAGE_kmod-mt7916-firmware
+            CONFIG_PACKAGE_kmod-pcie_mhi
+            CONFIG_PACKAGE_kmod-qmi_wwan_q
             CONFIG_PACKAGE_kmod-usb-net-cdc-mbim
             CONFIG_PACKAGE_kmod-usb-net-qmi-wwan
             CONFIG_PACKAGE_kmod-usb-serial
