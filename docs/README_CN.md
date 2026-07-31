@@ -117,6 +117,7 @@ CONFIG_PACKAGE_luci-app-udpxy=y
 CONFIG_PACKAGE_luci-app-cloudflared=y
 CONFIG_PACKAGE_luci-app-zerotier=y
 CONFIG_PACKAGE_nmap-full
+CONFIG_PACKAGE_luci-app-rustdesk-server=y
 ```
 ### ⚙️ 系统管理与工具
 ```
@@ -160,6 +161,7 @@ CONFIG_PACKAGE_luci-theme-kucat=y
 CONFIG_PACKAGE_luci-app-kucat-config=y
 CONFIG_PACKAGE_luci-theme-aurora=y
 CONFIG_PACKAGE_luci-theme-material3=y
+CONFIG_PACKAGE_luci-theme-Arwi=y
 CONFIG_PACKAGE_luci-theme-alpha=y
 CONFIG_PACKAGE_luci-app-alpha-config=y
 CONFIG_PACKAGE_luci-theme-bootstrap=y

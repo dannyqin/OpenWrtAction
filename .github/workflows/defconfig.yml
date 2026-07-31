@@ -35,7 +35,6 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_ARTIFACT: true
   UPLOAD_RELEASE: true
-  TZ: Asia/Shanghai
 
 jobs:
   job_init: 
@@ -52,9 +51,9 @@ jobs:
           echo "release_tag=multi-platform_$(date +"%Y.%m.%d_%H.%M.%S")" >> $GITHUB_OUTPUT
 
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Read Platforms From File
         id: read-platforms
@@ -74,7 +73,6 @@ jobs:
       - name: Init System
         id: init
         run: |
-          sudo timedatectl set-timezone "$TZ"
           sudo mkdir -p /workdir
           sudo chown -R $USER:$GROUPS /workdir
           cd /workdir
@@ -84,9 +82,9 @@ jobs:
           df -hT
 
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Clone Source Code
         working-directory: /workdir

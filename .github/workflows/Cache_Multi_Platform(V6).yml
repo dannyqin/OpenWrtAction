@@ -35,7 +35,6 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_ARTIFACT: true
   UPLOAD_RELEASE: true
-  TZ: Asia/Shanghai
 
 jobs:
   job_init: 
@@ -46,9 +45,9 @@ jobs:
       platforms_source: ${{ steps.read-platforms.outputs.source_matrix_json }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Read Platforms From File
         id: read-platforms
@@ -67,7 +66,6 @@ jobs:
       - name: Init System
         id: init
         run: |
-          sudo timedatectl set-timezone "$TZ"
           sudo mkdir -p /workdir
           sudo chown -R $USER:$GROUPS /workdir
           cd /workdir
@@ -77,9 +75,9 @@ jobs:
           df -hT
 
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Clone Source Code
         working-directory: /workdir
@@ -146,9 +144,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
-          fetch-depth: 0
+          ref: ${{ github.head_ref || github.ref_name }}
 
       - name: Matrix Status
         id: matrix_status
@@ -167,7 +165,6 @@ jobs:
       - name: Initialization Environment
         if: steps.matrix_status.outputs.status != 'success'
         run: |
-          sudo timedatectl set-timezone "$TZ"
           sudo mkdir -p /workdir
           sudo chown -R $USER:$GROUPS /workdir
           df -hT
@@ -192,7 +189,6 @@ jobs:
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install $(curl -fsSL https://github.com/smallprogram/OpenWrtAction/raw/main/diy_script/${{ matrix.source_code_platform }}_dependence)
-          sudo timedatectl set-timezone "$TZ"
 
       - name: Initialization Directory
         working-directory: /workdir
@@ -249,6 +245,11 @@ jobs:
           [ -e ${{ matrix.value.CONFIGS }}/${{ matrix.platform }}.config ] && cp -r ${{ matrix.value.CONFIGS }}/${{ matrix.platform }}.config openwrt/.config
           cd openwrt
           make defconfig
+          if [[ "${{ matrix.source_code_platform }}" == "openwrt" ]]; then
+            chmod +x $GITHUB_WORKSPACE/diy_script/openwrt_diy/diy-part4.sh
+            source $GITHUB_WORKSPACE/diy_script/openwrt_diy/diy-part4.sh
+            install_rustdesk_server
+          fi
 
       - name: Git Restore Mtime (True SSoT) And DL Restore Time
         if: steps.matrix_status.outputs.status != 'success'
