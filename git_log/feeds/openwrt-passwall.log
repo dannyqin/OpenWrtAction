@@ -1,13 +1,10 @@
 <details> <summary> <b>openwrt-passwall new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/Openwrt-Passwall/openwrt-passwall/compare/edbf910e5a6c91addca7e4de53f501b4e0b2ee61...207d3ae90a4a2c650ebaafa297dd03a6c1f07c60)  
+#### [:mega: Full Changelog. ](https://github.com/Openwrt-Passwall/openwrt-passwall/compare/207d3ae90a4a2c650ebaafa297dd03a6c1f07c60...b1bec1cf5b5e2ea858d60457ebe00c1388b6a55e)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-207d3ae9|A-BO|Fri Jul 31 16:44:30 2026 +0800|luci: optimize clash subconverter
-6f0b11b2|wybb|Fri Jul 31 13:45:33 2026 +0800|luci: preserve empty Hy bandwidth settings (#4436)
-3911b30b|A-BO|Fri Jul 31 13:02:34 2026 +0800|luci: fix the issue of write nftset in chinadns-ng none mode
-85cb3f75|A-BO|Thu Jul 30 13:27:08 2026 +0800|luci: optimize
-636c7218|A-BO|Wed Jul 29 20:50:06 2026 +0800|Revert "luci: add `disable-reuse` option for anytls"
+b1bec1cf|A-BO|Sat Aug 1 11:54:33 2026 +0800|luci: remove chinadns `chnlist-first` setting
+37fa2754|A-BO|Sat Aug 1 01:49:11 2026 +0800|luci: 26.8.1
 </details>
