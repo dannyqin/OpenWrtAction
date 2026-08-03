@@ -1,13 +1,10 @@
 <details> <summary> <b>luci-theme-aurora new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/eamonxg/luci-theme-aurora/compare/e681ecb0f44ee3e1d5712b8104a3ad38a3e7c4da...faa877a25ae264548b68d01e158c38e3d55c3625)  
+#### [:mega: Full Changelog. ](https://github.com/eamonxg/luci-theme-aurora/compare/faa877a25ae264548b68d01e158c38e3d55c3625...cd0809029e0bf7a9802fb94e5eee6d7546450855)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-faa877a|Eamon|Sun Aug 2 23:15:16 2026 +0800|refactor: consume tokens.css from @eamonxg/luci-theme-tokens, drop gen-tokens
-3d9dce0|Eamon|Sun Aug 2 18:30:55 2026 +0800|feat: bring the mock bar to device pages and back again
-49fff90|Eamon|Sun Aug 2 18:30:38 2026 +0800|fix: keep diskman's partition bar inside the card on small screens
-88e2f0c|Eamon|Sun Aug 2 16:48:59 2026 +0800|fix: give the wireless overview badges room to breathe
-b19bc4b|Eamon|Sun Aug 2 15:52:49 2026 +0800|feat: lead sidebar and drawer rows with section icons
+cd08090|Eamon|Mon Aug 3 14:44:57 2026 +0800|ci: point the release dispatch at the renamed openwrt-cloud repo
+e2490c4|Eamon|Mon Aug 3 12:59:59 2026 +0800|docs: simplify the feed install section
 </details>
