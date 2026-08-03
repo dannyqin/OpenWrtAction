@@ -1,4 +1,43 @@
-name: Prepare H69K Custom Build
+name: Test
+on:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latestname: Prepare H69K CTINFO Minimal Build
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Restrict build to LEDE H69K
+        shell: bash
+        run: |
+          sed -i 's/^source_code_platforms=.*/source_code_platforms=(lede)/' compile_script/platforms.sh
+          sed -i 's/^lede_platforms=.*/lede_platforms=(H69K)/' compile_script/platforms.sh
+      - name: Remove unrelated packages and sources
+        shell: bash
+        run: |
+          sed -i '/modemdata/d; /atcommands/d; /qosmate/d' diy_script/custom_feeds_and_packages.sh
+          cfg=config/leanlede_config/H69K.config
+          sed -i '/luci-app-3ginfo-lite/d; /luci-app-atcommands/d; /luci-app-cpufreq/d; /luci-app-modemband/d; /luci-app-modemdata/d; /luci-app-openclash/d; /luci-app-qosmate/d; /luci-proto-mbim/d; /luci-proto-qmi/d; /luci-proto-quectel/d; /CONFIG_PACKAGE_comgt=/d; /CONFIG_PACKAGE_modemband=/d; /CONFIG_PACKAGE_modemdata=/d; /CONFIG_PACKAGE_umbim=/d; /CONFIG_PACKAGE_uqmi=/d; /CONFIG_PACKAGE_quectel-cm=/d; /CONFIG_PACKAGE_qfirehose=/d; /CONFIG_PACKAGE_sms-tool=/d; /CONFIG_PACKAGE_qosmate=/d; /CONFIG_PACKAGE_zerotier=/d' $cfg
+          printf '%s
+' CONFIG_PACKAGE_kmod-sched-ctinfo=y >> $cfg
+      - name: Commit minimal configuration
+        shell: bash
+        run: |
+          git config user.name dannyqin
+          git config user.email dannyqin@users.noreply.github.com
+          git add compile_script/platforms.sh config/leanlede_config/H69K.config diy_script/custom_feeds_and_packages.sh
+          git commit -m 'build: minimal H69K ctinfo package' || true
+          git push origin HEAD:mainname: Prepare H69K Custom Build
 
 on:
   workflow_dispatch:
