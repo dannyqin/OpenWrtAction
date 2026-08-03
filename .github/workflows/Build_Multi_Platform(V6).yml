@@ -366,7 +366,19 @@ jobs:
           remove-codeql: 'true'
           remove-docker-images: 'true'
           build-mount-path: '/workdir'
-          
+
+      - name: Purge remaining root filesystem usage
+        if: steps.matrix_status.outputs.status != 'success'
+        run: |
+          set -eux
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+          sudo rm -rf /tmp/* /var/tmp/*
+          sudo rm -rf /opt/ghc /opt/hostedtoolcache /usr/local/lib/android
+          sudo rm -rf /usr/local/share/powershell /usr/local/lib/node_modules
+          sudo journalctl --vacuum-time=1s || true
+          df -hT
+
       - name: Install Packages
         if: steps.matrix_status.outputs.status != 'success'
         env:
