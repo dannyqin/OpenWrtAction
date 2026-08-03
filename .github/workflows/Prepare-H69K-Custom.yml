@@ -12,53 +12,20 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-
       - name: Restrict build to LEDE H69K
         shell: bash
         run: |
           sed -i 's/^source_code_platforms=.*/source_code_platforms=(lede)/' compile_script/platforms.sh
           sed -i 's/^lede_platforms=.*/lede_platforms=(H69K)/' compile_script/platforms.sh
-
       - name: Create minimal package set
         shell: bash
         run: |
           sed -i '/modemdata/d; /atcommands/d; /qosmate/d' diy_script/custom_feeds_and_packages.sh
           cfg=config/leanlede_config/H69K.config
           sed -i '/^CONFIG_PACKAGE_.*=[ym]$/d' "$cfg"
-          cat >> "$cfg" <<'EOF'
-CONFIG_PACKAGE_base-files=y
-CONFIG_PACKAGE_busybox=y
-CONFIG_PACKAGE_ca-bundle=y
-CONFIG_PACKAGE_dnsmasq=y
-CONFIG_PACKAGE_dropbear=y
-CONFIG_PACKAGE_firewall4=y
-CONFIG_PACKAGE_fstools=y
-CONFIG_PACKAGE_iptables-nft=y
-CONFIG_PACKAGE_kmod-nf-conntrack=y
-CONFIG_PACKAGE_kmod-nft-core=y
-CONFIG_PACKAGE_kmod-nft-offload=y
-CONFIG_PACKAGE_kmod-sched=y
-CONFIG_PACKAGE_kmod-sched-ctinfo=y
-CONFIG_PACKAGE_luci=y
-CONFIG_PACKAGE_luci-app-firewall=y
-CONFIG_PACKAGE_luci-base=y
-CONFIG_PACKAGE_luci-mod-admin-full=y
-CONFIG_PACKAGE_luci-mod-network=y
-CONFIG_PACKAGE_luci-mod-status=y
-CONFIG_PACKAGE_netifd=y
-CONFIG_PACKAGE_nftables=y
-CONFIG_PACKAGE_odhcp6c=y
-CONFIG_PACKAGE_odhcpd-ipv6only=y
-CONFIG_PACKAGE_opkg=y
-CONFIG_PACKAGE_procd=y
-CONFIG_PACKAGE_procd-ujail=y
-CONFIG_PACKAGE_ubus=y
-CONFIG_PACKAGE_ubus-lua=y
-CONFIG_PACKAGE_uci=y
-CONFIG_PACKAGE_uclient-fetch=y
-CONFIG_PACKAGE_urandom-seed=y
-EOF
-
+          for pkg in base-files busybox ca-bundle dnsmasq dropbear firewall4 fstools iptables-nft kmod-nf-conntrack kmod-nft-core kmod-nft-offload kmod-sched kmod-sched-ctinfo luci luci-app-firewall luci-base luci-mod-admin-full luci-mod-network luci-mod-status netifd nftables odhcp6c odhcpd-ipv6only opkg procd procd-ujail ubus ubus-lua uci uclient-fetch urandom-seed; do
+            printf 'CONFIG_PACKAGE_%s=y\n' "$pkg" >> "$cfg"
+          done
       - name: Commit minimal configuration
         shell: bash
         run: |
