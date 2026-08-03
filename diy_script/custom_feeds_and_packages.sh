@@ -55,13 +55,8 @@ clone_custom_packages () {
     git clone https://github.com/destan19/OpenAppFilter.git ${path}OpenAppFilter
 
     # H69K/RM520N-GL cellular management.
-    git clone --depth 1 https://github.com/4IceG/luci-app-modemdata.git ${path}luci-app-modemdata
-    git clone --depth 1 https://github.com/obsy/modemdata.git ${path}modemdata
-    git clone --depth 1 https://github.com/4IceG/luci-app-atcommands.git ${path}luci-app-atcommands
 
     # QoSmate backend and LuCI frontend.
-    git clone --depth 1 https://github.com/hudra0/qosmate.git ${path}qosmate
-    git clone --depth 1 https://github.com/hudra0/luci-app-qosmate.git ${path}luci-app-qosmate
 
     # H69K userspace PWM fan controller and LuCI interface.
     cp -a "$PATCHES_SRC_DIR/custom_packages/luci-app-h69k-fancontrol" \
