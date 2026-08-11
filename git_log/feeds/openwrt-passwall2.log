@@ -1,0 +1,25 @@
+<details> <summary> <b>openwrt-passwall2 new commit log :rocket: </b> </summary>
+
+#### [:mega: Full Changelog. ](https://github.com/Openwrt-Passwall/openwrt-passwall2/compare/5ef64bc0802924bc8fe2a0a06ce737dcb2905542...ec961b312de1b9a948a2ed9f0be48436ef30c53f)  
+:heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
+
+SHA|Author|Date|Message
+-|-|-|-
+ec961b3|handsomeji|Tue Aug 11 14:29:03 2026 +0800|luci: fix Socks with HTTP status
+9075e5f|Jackie264|Tue Aug 11 14:33:21 2026 +0800|luci: fix: migrate legacy Socks_ node references in uci-defaults
+6a4f7f5|handsomeji|Mon Aug 10 21:02:28 2026 +0800|luci: bump to 26.8.10
+15ee150|handsomeji|Mon Aug 10 20:12:33 2026 +0800|luci: adjust Sing-Box DNS strategy logic
+828a128|handsomeji|Mon Aug 10 20:05:58 2026 +0800|luci: remove front_dns logic
+c213e53|handsomeji|Sun Aug 9 19:06:24 2026 +0800|luci: simplify code
+9459d2a|handsomeji|Sun Aug 9 18:44:05 2026 +0800|luci: adjust `cipherSuites` option
+1be8f40|Jackie264|Sun Aug 9 18:25:51 2026 +0800|luci: optimize and fixup (#1211)
+2617adf|handsomeji|Sun Aug 9 09:21:37 2026 +0800|luci: `gen_short_uuid()` -> `gen_random_char()`
+9d5b186|handsomeji|Sun Aug 9 09:15:46 2026 +0800|luci: fix typo
+e840e43|handsomeji|Sun Aug 9 01:39:21 2026 +0800|luci: optimize and fix detail
+1450c76|handsomeji|Sun Aug 9 00:35:52 2026 +0800|luci: Sing-Box add `cipherSuites` option
+c62cdd7|handsomeji|Sat Aug 8 22:34:45 2026 +0800|luci: fix #1185
+89b4527|handsomeji|Sat Aug 8 22:01:31 2026 +0800|luci: Xray add `cipherSuites` option
+54cac8e|handsomeji|Sat Aug 8 19:24:13 2026 +0800|luci: subscribe_list does not use anonymous id
+
+
+</details>

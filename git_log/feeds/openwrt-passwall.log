@@ -1,0 +1,25 @@
+<details> <summary> <b>openwrt-passwall new commit log :rocket: </b> </summary>
+
+#### [:mega: Full Changelog. ](https://github.com/Openwrt-Passwall/openwrt-passwall/compare/b1bec1cf5b5e2ea858d60457ebe00c1388b6a55e...47dcb95d638f7fa41173f9ed214e284ab5b01bca)  
+:heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
+
+SHA|Author|Date|Message
+-|-|-|-
+47dcb95d|A-BO|Tue Aug 11 17:09:13 2026 +0800|luci: 26.8.11
+ed8aa068|A-BO|Tue Aug 11 17:07:12 2026 +0800|luci: fix: migrate legacy Socks_ node references in uci-defaults
+d92fcef5|A-BO|Tue Aug 11 14:58:31 2026 +0800|luci: fix Socks with HTTP status
+ab01d11a|A-BO|Mon Aug 10 23:56:46 2026 +0800|luci: 26.8.10
+326598d3|A-BO|Mon Aug 10 23:37:33 2026 +0800|luci: adjust xray finalmask order
+c10765b9|A-BO|Mon Aug 10 23:13:12 2026 +0800|luci: adjust Sing-Box DNS strategy logic
+6bd10811|A-BO|Mon Aug 10 13:36:43 2026 +0800|Revert "luci: remove the `default allowinsecure` setting from the subscribe"
+ec3953b5|A-BO|Mon Aug 10 13:34:12 2026 +0800|luci: fixup
+5a424847|A-BO|Mon Aug 10 11:33:58 2026 +0800|luci: optimize clash subconverter
+50b207e1|A-BO|Mon Aug 10 09:42:54 2026 +0800|luci: simplify code
+65a19a4e|David Mandy|Mon Aug 10 03:26:50 2026 +0800|luci: default rule update
+fa1de0c3|A-BO|Sun Aug 9 23:17:21 2026 +0800|luci: adapt section markup for old and new LuCI versions
+ba6d052c|A-BO|Sun Aug 9 21:15:59 2026 +0800|luci: simplify code
+ae9a5962|A-BO|Sun Aug 9 18:29:07 2026 +0800|luci: optimize
+9206fc62|A-BO|Sun Aug 9 15:01:36 2026 +0800|luci: `gen_short_uuid()` -> `gen_random_char()`
+
+
+</details>

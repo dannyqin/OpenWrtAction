@@ -1,0 +1,9 @@
+<details> <summary> <b>OpenWrt-nikki new commit log :rocket: </b> </summary>
+
+#### [:mega: Full Changelog. ](https://github.com/nikkinikki-org/OpenWrt-nikki/compare/34a036708c4e163f11194b2952cd87ef386486ed...388f34e5c7749ea9bc2d2068dafb569014ee32e7)  
+:heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
+
+SHA|Author|Date|Message
+-|-|-|-
+388f34e|KozakLordOfMatrix|Tue Aug 4 12:17:05 2026 +0300|fix(rpcd): use TLS listen address for API requests when configured (#884)
+</details>
