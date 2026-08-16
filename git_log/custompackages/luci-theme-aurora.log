@@ -1,23 +1,10 @@
 <details> <summary> <b>luci-theme-aurora new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/eamonxg/luci-theme-aurora/compare/cd0809029e0bf7a9802fb94e5eee6d7546450855...e10bd0969c4978ad41495f7e53ac6fd162dda113)  
+#### [:mega: Full Changelog. ](https://github.com/eamonxg/luci-theme-aurora/compare/e10bd0969c4978ad41495f7e53ac6fd162dda113...6734945523b2de09b78dc6fa338e373dc2a280ef)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-e10bd09|Eamon|Sat Aug 8 15:54:35 2026 +0800|chore: bump to 1.2.0
-5462395|Eamon|Sat Aug 8 15:49:34 2026 +0800|fix: link the login footer to the full contributor history
-7e093b7|Eamon|Sat Aug 8 14:24:53 2026 +0800|feat: the shortcut toolbar renders the config and nothing else
-ec160c4|Eamon|Sat Aug 8 10:57:47 2026 +0800|fix: wire menu.d custom CSS to the dispatched node
-0deaab5|Eamon|Sat Aug 8 10:19:55 2026 +0800|fix: hand the studio background layout back to the config app
-2030065|Eamon|Sat Aug 8 03:54:38 2026 +0800|Revert "fix: bust asset caches by mtime so updates land without a hard refresh"
-a736b08|Eamon|Sat Aug 8 03:53:02 2026 +0800|chore: bump to 1.1.14
-402b90b|Eamon|Sat Aug 8 03:47:53 2026 +0800|fix: bust asset caches by mtime so updates land without a hard refresh
-09ef157|Eamon|Sat Aug 8 03:06:55 2026 +0800|feat: two always-visible background cards replace the segmented switch
-c3646b3|Eamon|Sat Aug 8 02:56:52 2026 +0800|feat: dress the studio background panel via its page patch
-2941100|Eamon|Sat Aug 8 02:41:30 2026 +0800|feat: let the login card go frosted with its own three tunables
-66c3196|Eamon|Sat Aug 8 01:51:41 2026 +0800|feat: floor readability for any plugin page with a content canvas
-bb975aa|Eamon|Sat Aug 8 01:44:58 2026 +0800|fix: lift admin content above the fixed background layer
-98a7217|Eamon|Sat Aug 8 01:16:40 2026 +0800|feat: custom admin background behind frosted chrome and translucent cards
-369306f|Eamon|Wed Aug 5 10:33:02 2026 +0800|docs: note the apk world pin that silently blocks upgrades
+6734945|Eamon|Sun Aug 16 22:54:41 2026 +0800|docs: add the same-document router architecture diagram
+664c795|eamonxg|Sun Aug 16 21:38:43 2026 +0800|feat: same-document navigation for view pages via the Navigation API
 </details>

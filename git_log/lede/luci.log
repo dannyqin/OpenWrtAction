@@ -1,9 +1,0 @@
-<details> <summary> <b>luci new commit log :rocket: </b> </summary>
-
-#### [:mega: Full Changelog. ](https://github.com/coolsnowwolf/luci/compare/c7b8fa25d24f8d1fdce08a281a6236bc86bab4c5...89dde1c8c2d4a5e629bf30363d34431a8e8b07f1)  
-:heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
-
-SHA|Author|Date|Message
--|-|-|-
-89dde1c8c2|coolsnowwolf|Tue Aug 4 02:42:15 2026 +0800|luci-mod-network: show stations on initial refresh
-</details>
