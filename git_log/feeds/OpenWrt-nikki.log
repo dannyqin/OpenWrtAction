@@ -1,9 +1,9 @@
 <details> <summary> <b>OpenWrt-nikki new commit log :rocket: </b> </summary>
 
-#### [:mega: Full Changelog. ](https://github.com/nikkinikki-org/OpenWrt-nikki/compare/3799926b147d7065ac98508f16951f8714e53659...21befe0aec3806b59a37a4ef689288c6a1f4a61a)  
+#### [:mega: Full Changelog. ](https://github.com/nikkinikki-org/OpenWrt-nikki/compare/21befe0aec3806b59a37a4ef689288c6a1f4a61a...7b203f6c4c5e94c6c0026acb301090aa1d310e7f)  
 :heavy_exclamation_mark: The list displays only the latest 15 commit logs.  
 
 SHA|Author|Date|Message
 -|-|-|-
-21befe0|akovale2025|Sun Sep 13 21:02:59 2026 -0400|fix: read yq output fully before json() in load_profile (#905)
+7b203f6|github-actions[bot]|Thu Sep 17 08:51:24 2026 +0800|chore: update mihomo-meta to v1.19.31 (#906)
 </details>
